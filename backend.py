@@ -44,8 +44,8 @@ def processTime(duedate, time):
 def run(title, duedate1, duedate2, time1, time2, assignment1, assignment2, paste):
     print("debug: ", title, duedate1, duedate2, time1, time2, assignment1, assignment2)
 
-    
-    
+
+
     dueDateC = -1
     dueDateR = -1
     if assignment1 == "Comments":
@@ -60,11 +60,11 @@ def run(title, duedate1, duedate2, time1, time2, assignment1, assignment2, paste
     #dueDateC = datetime.datetime(2020, 8, 28, 23, 59) #duedate for comment
 
     d = {}
-    open('templates/table.html', 'w').close()
+    open('/home/superstarcoder/mysite/CCWeb/templates/table.html', 'w').close()
 
-    with open("templates/table-head.html") as f:
+    with open("/home/superstarcoder/mysite/CCWeb/templates/table-head.html") as f:
         table_head = f.readlines()
-    with open("templates/table-foot.html") as f:
+    with open("/home/superstarcoder/mysite/CCWeb/templates/table-foot.html") as f:
         table_foot = f.readlines()
 
     import schoologyCounter as sc
@@ -136,6 +136,6 @@ def run(title, duedate1, duedate2, time1, time2, assignment1, assignment2, paste
 
         table_data.append("			</div>\n")
 
-    with open("templates/table.html", "w") as f:
+    with open("/home/superstarcoder/mysite/CCWeb/templates/table.html", "w") as f:
         table_foot = f.writelines(table_head+table_data+table_foot)
     print("html file has been updated")

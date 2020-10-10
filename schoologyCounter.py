@@ -44,7 +44,7 @@ def readData(d, f):
         elif  (x == "Hide 1 reply\n") or (x.endswith("Hide 1 reply")) or (x[:-2] == "Hide 1 reply"):
             replyChain = 1
 
-            
+
         elif x.startswith("Profile picture"):
             #store username
             name = " ".join(x.split()[3:])
@@ -53,7 +53,7 @@ def readData(d, f):
 
         elif stage==2 and x.startswith(name):
             try:
-                
+
                 time = x.replace(",", "").replace(name, "").replace("Edited · ", "").split()
                 if "Today" in time:
                     now = datetime.datetime.now().date()
@@ -63,7 +63,7 @@ def readData(d, f):
                     hour, minute = [int(x) for x in time[2].split(":")]
                     period = time[3] #period means am/pm
                 else:
-                
+
                     #W is for word, while no W is for number
                     dayW = time[0]
                     monthW = time[1]
@@ -76,8 +76,16 @@ def readData(d, f):
 #normal
 #Shivani ChoudharyTue Aug 25, 2020 at 8:12 pm
 
-                if period == "pm" and hour < 12:
+                #if period == "pm" and hour < 12:
+                #    hour += 12
+
+
+                #next r lines are new code
+                if period == "am" and hour == 12:
+                    hour -= 12
+                elif period == "pm" and (hour in range(1, 12)) and (minute in range(0, 60)):
                     hour += 12
+
                 content = ""
                 stage = 3
                 #large to small: (year, month, day, hour, minute)
