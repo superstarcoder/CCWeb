@@ -41,7 +41,7 @@ def readData(d, f):
         if (x.startswith("Hide All")) and (x.endswith("Replies") or x[:-1].endswith("Replies") or x[:-2].endswith("Replies")):
             replyChain = int(x.split()[2])
             print(replyChain)
-        elif  (x == "Hide 1 reply\n") or (x.endswith("Hide 1 reply")) or (x[:-2] == "Hide 1 reply"):
+        elif  (x == "Hide 1 reply\n") or (x.endswith("Hide 1 reply")) or (x[:-1] == "Hide 1 reply") or (x[:-2] == "Hide 1 reply"):
             replyChain = 1
 
 
@@ -90,8 +90,9 @@ def readData(d, f):
                 stage = 3
                 #large to small: (year, month, day, hour, minute)
                 timeData = datetime.datetime(year, month, day, hour, minute)
-                timeDisplay = "%s %s %s %s %s:%s %s" % (dayW, monthW, day, year, hour, minute, period)
-            except:
+                timeDisplay = "%s %s %s:%s %s" % (day, year, hour, minute, period)
+            except Exception as p:
+                print(p)
                 stage = 1
                 print("WARNING, THE FOLLOWING NAME WAS IGNORED:")
                 print(name)

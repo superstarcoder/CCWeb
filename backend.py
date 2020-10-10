@@ -1,6 +1,4 @@
 
-
-
 """
 parameters
 title=request.form['title']
@@ -56,42 +54,38 @@ def run(title, duedate1, duedate2, time1, time2, assignment1, assignment2, paste
         dueDateR = processTime(duedate1, time1)
     elif assignment2 == "Replies":
         dueDateR = processTime(duedate2, time2)
-    #dueDateR = datetime.datetime(2020, 8, 27, 23, 59) #duedate for reply. year, month, day, hour, minute
-    #dueDateC = datetime.datetime(2020, 8, 28, 23, 59) #duedate for comment
+    # dueDateR = datetime.datetime(2020, 8, 27, 23, 59) #duedate for reply. year, month, day, hour, minute
+    # dueDateC = datetime.datetime(2020, 8, 28, 23, 59) #duedate for comment
+    # path = "home/superstarcoder/mysite/CCWeb"
+    myPath = ""
 
     d = {}
-    open('/home/superstarcoder/mysite/CCWeb/templates/table.html', 'w').close()
+    open(myPath+'templates/table.html', 'w').close()
 
-    with open("/home/superstarcoder/mysite/CCWeb/templates/table-head.html") as f:
+    with open(myPath+"templates/table-head.html") as f:
         table_head = f.readlines()
-    with open("/home/superstarcoder/mysite/CCWeb/templates/table-foot.html") as f:
+    with open(myPath+"templates/table-foot.html") as f:
         table_foot = f.readlines()
 
     import schoologyCounter as sc
     f = paste
     d = sc.readData(d, f)
 
+    # print("Name".ljust(25)+"|"+"total".ljust(8)+"|"+"on time C".ljust(8)+"|"+"late C".ljust(8)+"|"+"on time R".ljust(8)+"|"+"late R".ljust(9))
 
-
-
-
-
-
-#print("Name".ljust(25)+"|"+"total".ljust(8)+"|"+"on time C".ljust(8)+"|"+"late C".ljust(8)+"|"+"on time R".ljust(8)+"|"+"late R".ljust(9))
-
-#name, total, on time Comments, late Comments, on time Replies, late Replies
+    # name, total, on time Comments, late Comments, on time Replies, late Replies
     data = []
 
     loop = False
     ls = []
-    for key,value in d.items():
+    for key ,value in d.items():
         loop = True
         lateReply = 0
         onTimeReply = 0
         lateComment = 0
         onTimeComment = 0
         for x in value:
-            #problem is it reads everthing as comments
+            # problem is it reads everthing as comments
             print("debug:", dueDateC, dueDateR)
             print("hmmmm:",  x["timeData"], x["commentType"])
             if x["commentType"] == "reply":
@@ -132,10 +126,10 @@ def run(title, duedate1, duedate2, time1, time2, assignment1, assignment2, paste
         for x in row:
             s = "				<div class=\"table-data\">"
             e = "</div>\n"
-            table_data.append(s+str(x)+e)
+            table_data.append( s +str(x ) +e)
 
         table_data.append("			</div>\n")
 
-    with open("/home/superstarcoder/mysite/CCWeb/templates/table.html", "w") as f:
-        table_foot = f.writelines(table_head+table_data+table_foot)
+    with open(myPath+"templates/table.html", "w") as f:
+        table_foot = f.writelines(table_head +table_data +table_foot)
     print("html file has been updated")
